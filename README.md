@@ -1,5 +1,7 @@
 # Next Blog App
 
+##[Link to the deployed version](https://next-blog-app-fixed.vercel.app/)
+
 ## [Link to initial repo](https://github.com/timazubar/next-blog-app)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -21,8 +23,9 @@ This app is made made using following technologies:
 - React
 - Redux
 - TypeScript
-- Styled Components
 - axios
+- Styled Components
+- React Bootstrap
 - Postman API
 
 ## Learn More
