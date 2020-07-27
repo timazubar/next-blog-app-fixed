@@ -27,6 +27,9 @@ const Post: NextPage<Props> = ({ post, isError }) => {
       ) : (
         <Wrapper>
           <StyledCard>
+            <Link href="/posts/[id]/edit" as={`/posts/${post.id}/edit`}>
+              <a>Edit post</a>
+            </Link>
             <Card.Body>
               <Link href="/">
                 <a>&larr;Go back to posts list</a>

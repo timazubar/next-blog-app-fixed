@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NextPage } from 'next';
 import { Dispatch } from 'redux';
 import { Button, Form, Modal } from 'react-bootstrap';
@@ -21,7 +21,14 @@ interface Props extends State {
   sendPost: (post: PostModel) => Promise<void>;
 }
 
-const CreatePost: NextPage<Props> = ({ sendPost, isSent, isLoading, isError }) => {
+const CreatePost: NextPage<Props> = () => {
+  const isSent = useSelector((state: StateModel) => state.createPost.isSent);
+  const isLoading = useSelector((state: StateModel) => state.createPost.isLoading);
+  const isError = useSelector((state: StateModel) => state.createPost.isError);
+  const dispatch = useDispatch();
+
+  const sendPostAction = sendPost(dispatch);
+
   const titleRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -36,7 +43,7 @@ const CreatePost: NextPage<Props> = ({ sendPost, isSent, isLoading, isError }) =
             const body = contentRef.current.value;
             contentRef.current.value = '';
             titleRef.current.value = '';
-            sendPost({ title, body });
+            sendPostAction({ title, body });
           }}
         >
           <StyledFormGroup>
@@ -97,14 +104,4 @@ const StyledFormGroup = styled(Form.Group)`
   flex-direction: column;
 `;
 
-const mapStateToProps = (state: StateModel): State => ({
-  isSent: state.createPost.isSent,
-  isLoading: state.createPost.isLoading,
-  isError: state.createPost.isError,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): { sendPost: (post: PostModel) => Promise<void> } => ({
-  sendPost: sendPost(dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
+export default CreatePost;

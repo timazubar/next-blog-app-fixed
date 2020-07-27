@@ -17,4 +17,8 @@ export default class PostsService {
   sendPost(post: PostModel): void {
     axios.post(`${this.apiBase}/posts`, post);
   }
+
+  updatePost(post: PostModel): void {
+    axios.put(`${this.apiBase}/posts`, post);
+  }
 }
